@@ -1,0 +1,63 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+<form id="frmNuevoBarco"
+      method="post"
+      action="/barco/nueva"
+      enctype="multipart/form-data"
+      onsubmit="return check()">
+    <div class="form-group col-6" style="margin-left:40px; margin-top: 40px; border-style: groove; background-color: aliceblue">
+        <p>
+            <label for="edClase">Clase:</label>
+            <select name="edClase" class="form-select" id="edClase" form="frmNuevoBarco">
+              <option value="Battleship">Battleship</option>
+              <option value="Cruiser">Cruiser</option>
+              <option value="Destroyer">Destroyer</option>
+              <option value="Aircraft Carrier">Aircraft Carrier</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="edPais">Pais:</label>
+            <select name="edPais" class="form-select" id="edPais" form="frmNuevoBarco">
+              <option value="Germany">Germany</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Japan">Japan</option>
+              <option value="USA">USA</option>
+              <option value="Italy">Italy</option>
+              <option value="France">France</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="edNombre">Nombre:</label>
+            <input type="text" class="form-control" id="edNombre" name="edNombre"
+                   placeholder="Name of the Ship" />
+        </p>
+
+        <p>
+            <label for="edDesc">Descripción:</label>
+            <p></p>
+            <textarea id="edDesc" class="form-control" name="edDesc" rows="4" cols="60"></textarea>
+        </p>
+
+        <p><input type="submit" value="Crear"></p>
+    </div>
+</form>
+
+
+<script>
+    function check()
+    {
+        const edNombre = document.getElementById( "edNombre" );
+        const edClase = document.getElementById( "edCurso" );
+        const edPais = document.getElementById( "edPais" );
+
+        return ( edNombre.value.trim().length > 0
+              && edClase.value.trim().length > 0)
+              && edPais.value.trim().length > 0
+    }
+</script>
+
+
+{% endblock %}

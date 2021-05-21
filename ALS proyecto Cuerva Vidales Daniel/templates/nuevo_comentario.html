@@ -1,0 +1,31 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+<form id="frmNuevoComentario"
+      method="post"
+      action="/comentario/nueva?ship={{ clave_barco }}"
+      enctype="multipart/form-data"
+      onsubmit="return check()">
+<div class="form-group col-6" style="margin-left:40px; margin-top: 40px; border-style: groove; background-color: aliceblue">
+    <p>
+        <label for="edDesc">Comentario:</label>
+        <p></p>
+        <textarea id="edDesc" class="form-control" name="edDesc" rows="4" cols="60"></textarea>
+    </p>
+
+    <p><input type="submit" value="Comentar"></p>
+</div>
+</form>
+
+
+<script>
+    function check()
+    {
+        const edDesc = document.getElementById( "edDesc" );
+
+        return ( edDesc.value.trim().length > 0 )
+    }
+</script>
+
+
+{% endblock %}

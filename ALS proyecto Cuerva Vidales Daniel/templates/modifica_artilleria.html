@@ -1,0 +1,59 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+
+<form id="frmNuevoEquipamiento"
+      method="post"
+      action="/artilleria/modifica?id={{ artilleria.key.urlsafe() }}&ship={{ clave_barco }}"
+      enctype="multipart/form-data"
+      onsubmit="return check()">
+<div class="form-group col-6" style="margin-left:40px; margin-top: 40px; border-style: groove; background-color: aliceblue">
+    <p>
+        <label for="edTipo">Tipo:</label>
+        <input type="text" class="form-control" id="edTipo" name="edTipo"
+                   value="{{ artilleria.tipo }}" readonly />
+    </p>
+    <div id="count">
+        <p>
+            <label for="edCantidad">Cantidad:</label>
+            <input type="number" class="form-control" id="edCantidad" name="edCantidad"
+                    value="{{ artilleria.cantidad }}" />
+        </p>
+    </div>
+    <p>
+        <label for="edNombre">Nombre:</label>
+        <input type="text" class="form-control" id="edNombre" name="edNombre"
+               value="{{ artilleria.nombre }}" />
+    </p>
+
+    <div id="arti" >
+        <p>
+            <label for="edCalibre">Calibre: (mm)</label>
+            <input type="text" class="form-control" id="edCalibre" name="edCalibre"
+                   value="{{ artilleria.calibre }}" />
+        </p>
+        <p>
+            <label for="edAlcance">Alcance: (km)</label>
+            <input type="text" class="form-control" id="edAlcance" name="edAlcance"
+                   value="{{ artilleria.alcance }}" />
+        </p>
+    </div>
+    <p><input type="submit" value="Modificar"></p>
+</div>
+</form>
+
+
+<script>
+    function check()
+    {
+        const edNombre = document.getElementById( "edNombre" );
+        const edTipo = document.getElementById( "edTipo" );
+
+        return ( edNombre.value.trim().length > 0
+              && edTipo.value.trim().length > 0)
+    }
+</script>
+
+
+
+{% endblock %}

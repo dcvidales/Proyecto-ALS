@@ -1,0 +1,169 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+
+<form id="frmNuevoEquipamiento"
+      method="post"
+      action="/equipamiento/nueva?ship={{ clave_barco }}"
+      enctype="multipart/form-data"
+      onsubmit="return check()">
+<div class="form-group col-6" style="margin-left:40px; margin-top: 40px; margin-bottom: 40px; border-style: groove; background-color: aliceblue">
+    <p>
+        <label for="edTipo">Tipo:</label>
+        <select name="edTipo" id="edTipo" form="frmNuevoEquipamiento" onchange="show()">
+          <option value="AA">AA</option>
+          <option value="Artilleria">Artillería</option>
+          <option value="Torpedo">Torpedo</option>
+          <option value="Casco">Casco</option>
+          <option value="Motor">Motor</option>
+          <option value="Avion">Avion</option>
+        </select>
+    </p>
+    <div id="count">
+        <p>
+            <label for="edCantidad">Cantidad:</label>
+            <input type="number" class="form-control" id="edCantidad" name="edCantidad"
+                   placeholder="Cantidad" />
+        </p>
+    </div>
+    <p>
+        <label for="edNombre">Nombre:</label>
+        <input type="text" class="form-control" id="edNombre" name="edNombre"
+               placeholder="Nombre del Equipamiento" />
+    </p>
+
+    <div id="arti" >
+        <p>
+            <label for="edCalibre">Calibre: (mm)</label>
+            <input type="text" class="form-control" id="edCalibre" name="edCalibre"
+                   placeholder="Calibre" />
+        </p>
+        <p>
+            <label for="edAlcance">Alcance: (km)</label>
+            <input type="text" class="form-control" id="edAlcance" name="edAlcance"
+                   placeholder="Alcance" />
+        </p>
+    </div>
+    <div id="torp" style="visibility: hidden">
+        <p>
+            <label for="edVelocidad">Velocidad: (knts)</label>
+            <input type="text" class="form-control" id="edVelocidad" name="edVelocidad"
+                   placeholder="Velocidad" />
+        </p>
+    </div>
+    <div id="casco" style="visibility: hidden">
+        <p>
+            <label for="edBlindaje">Blindaje: (mm)</label>
+            <input type="text" class="form-control" id="edBlindaje" name="edBlindaje"
+                   placeholder="Blindaje" />
+        </p>
+        <p>
+            <label for="edAncho">Ancho: (m)</label>
+            <input type="text" class="form-control" id="edAncho" name="edAncho"
+                   placeholder="Ancho" />
+        </p>
+        <p>
+            <label for="edLargo">Largo: (m)</label>
+            <input type="text" class="form-control" id="edLargo" name="edLargo"
+                   placeholder="Largo" />
+        </p>
+    </div>
+    <div id="motor" style="visibility: hidden">
+        <p>
+            <label for="edPotencia">Potencia: (CV)</label>
+            <input type="text" class="form-control" id="edPotencia" name="edPotencia"
+                   placeholder="Potencia" />
+        </p>
+        <p>
+            <label for="edVelocidadMax">Velocidad Máxima: (knts)</label>
+            <input type="text" class="form-control" id="edVelocidadMax" name="edVelocidadMax"
+                   placeholder="Velocidad Máxima" />
+        </p>
+    </div>
+    <div id="avion" style="visibility: hidden">
+        <p>
+            <label for="edClase">Clase:</label>
+            <select name="edClase" class="form-select" id="edClase" form="frmNuevoEquipamiento">
+                <option value="Caza">Caza</option>
+                <option value="Bombardero">Bombardero</option>
+                <option value="Torpedero">Torpedero</option>
+                <option value="Observación">Observacion</option>
+            </select>
+        </p>
+        <p>
+            <label for="edVelocidadAvion">Nombre: (knts)</label>
+            <input type="text" class="form-control" id="edVelocidadAvion" name="edVelocidadAvion"
+                   placeholder="Velocidad Máxima" />
+        </p>
+    </div>
+    <p><input type="submit" value="Crear"></p>
+</form>
+
+
+<script>
+    function check()
+    {
+        const edNombre = document.getElementById( "edNombre" );
+        const edTipo = document.getElementById( "edTipo" );
+
+        return ( edNombre.value.trim().length > 0
+              && edTipo.value.trim().length > 0)
+    }
+</script>
+
+<script>
+    function show()
+    {
+        if(document.getElementById( "edTipo" ).value == "Artillería" ){
+            document.getElementById( "count" ).style.visibility = "visible";
+            document.getElementById( "arti" ).style.visibility = "visible";
+            document.getElementById( "torp" ).style.visibility = "hidden";
+            document.getElementById( "casco" ).style.visibility = "hidden";
+            document.getElementById( "motor" ).style.visibility = "hidden";
+            document.getElementById( "avion" ).style.visibility = "hidden";
+        }
+        else if(document.getElementById( "edTipo" ).value == "Torpedo" ){
+            document.getElementById( "count" ).style.visibility = "visible";
+            document.getElementById( "arti" ).style.visibility = "visible";
+            document.getElementById( "torp" ).style.visibility = "visible";
+            document.getElementById( "casco" ).style.visibility = "hidden";
+            document.getElementById( "motor" ).style.visibility = "hidden";
+            document.getElementById( "avion" ).style.visibility = "hidden";
+        }
+        else if(document.getElementById( "edTipo" ).value == "AA" ){
+            document.getElementById( "count" ).style.visibility = "visible";
+            document.getElementById( "arti" ).style.visibility = "visible";
+            document.getElementById( "torp" ).style.visibility = "hidden";
+            document.getElementById( "casco" ).style.visibility = "hidden";
+            document.getElementById( "motor" ).style.visibility = "hidden";
+            document.getElementById( "avion" ).style.visibility = "hidden";
+        }
+        else if(document.getElementById( "edTipo" ).value == "Casco" ){
+            document.getElementById( "count" ).style.visibility = "hidden";
+            document.getElementById( "arti" ).style.visibility = "hidden";
+            document.getElementById( "torp" ).style.visibility = "hidden";
+            document.getElementById( "casco" ).style.visibility = "visible";
+            document.getElementById( "motor" ).style.visibility = "hidden";
+            document.getElementById( "avion" ).style.visibility = "hidden";
+        }
+        else if(document.getElementById( "edTipo" ).value == "Motor" ){
+            document.getElementById( "count" ).style.visibility = "hidden";
+            document.getElementById( "arti" ).style.visibility = "hidden";
+            document.getElementById( "torp" ).style.visibility = "hidden";
+            document.getElementById( "casco" ).style.visibility = "hidden";
+            document.getElementById( "motor" ).style.visibility = "visible";
+            document.getElementById( "avion" ).style.visibility = "hidden";
+        }
+        else if(document.getElementById( "edTipo" ).value == "Avion" ){
+            document.getElementById( "count" ).style.visibility = "visible";
+            document.getElementById( "arti" ).style.visibility = "hidden";
+            document.getElementById( "torp" ).style.visibility = "hidden";
+            document.getElementById( "casco" ).style.visibility = "hidden";
+            document.getElementById( "motor" ).style.visibility = "hidden";
+            document.getElementById( "avion" ).style.visibility = "visible";
+        }
+    }
+</script>
+
+
+{% endblock %}

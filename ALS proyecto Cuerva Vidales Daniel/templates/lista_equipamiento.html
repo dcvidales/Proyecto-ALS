@@ -1,0 +1,155 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+<h1 style="text-align:center">{% include "logo.html" %}{{ barco.nombre }}{% include "logo.html" %}</h1>
+<hr size="5px">
+<div style="margin-left: 20px">
+<h2><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
+  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4v8z"/>
+</svg> Descripción</h2>
+<p style="font-family: 'Arial', 'Helvetica', 'sans-serif'; margin-left: 30px" >
+    {{ barco.desc }}
+</p>
+<h2><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
+  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4v8z"/>
+</svg> Lista de Equipamiento</h2>
+<div style="margin-left: 30px">
+<a data-bs-toggle="collapse" href="#collapseExample"><h3>Listado de Antiaéreos</h3></a>
+{% if aa.count() > 0 %}
+<div class="collapse" id="collapseExample">
+    {% for aa in aa %}
+    <li class="list-group-item">
+        (<a href="/aa/elimina?id={{ aa.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">supr</a>)
+        (<a href="/aa/modifica?id={{ aa.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">modif</a>)
+        {% include "entrada_aa.html" %}
+    </li>
+    {% endfor %}
+</div>
+{% else %}
+<div class="collapse" id="collapseExample">
+    <p><b>No hay antiaéreos registrados.</b></p>
+</div>
+{% endif %}
+
+<a data-bs-toggle="collapse" href="#collapseExample2"><h3>Listado de Armas Principales</h3></a>
+{% if artilleria.count() > 0 %}
+<div class="collapse" id="collapseExample2">
+    {% for artilleria in artilleria %}
+    <li class="list-group-item">
+        (<a href="/artilleria/elimina?id={{ artilleria.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">supr</a>)
+        (<a href="/artilleria/modifica?id={{ artilleria.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">modif</a>)
+        {% include "entrada_artilleria.html" %}
+    </li>
+    {% endfor %}
+</div>
+{% else %}
+<div class="collapse" id="collapseExample2">
+    <p><b>No hay armamento principal registrado.</b></p>
+</div>
+{% endif %}
+
+<a data-bs-toggle="collapse" href="#collapseExample3"><h3>Listado de Torpedos</h3></a>
+{% if torp.count() > 0 %}
+<div class="collapse" id="collapseExample3">
+    {% for torp in torp %}
+    <li class="list-group-item">
+        (<a href="/torpedo/elimina?id={{ torp.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">supr</a>)
+        (<a href="/torpedo/modifica?id={{ torp.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">modif</a>)
+        {% include "entrada_torpedo.html" %}
+    </li>
+    {% endfor %}
+</div>
+{% else %}
+<div class="collapse" id="collapseExample3">
+    <p><b>No hay torpedos registrados.</b></p>
+</div>
+{% endif %}
+
+<a data-bs-toggle="collapse" href="#collapseExample4"><h3>Listado de Casco</h3></a>
+{% if casco.count() > 0 %}
+<div class="collapse" id="collapseExample4">
+    {% for casco in casco %}
+    <li class="list-group-item">
+        (<a href="/casco/elimina?id={{ casco.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">supr</a>)
+        (<a href="/casco/modifica?id={{ casco.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">modif</a>)
+        {% include "entrada_casco.html" %}
+    </li>
+    {% endfor %}
+</div>
+{% else %}
+<div class="collapse" id="collapseExample4">
+    <p><b>No hay Casco registrado.</b></p>
+</div>
+{% endif %}
+
+<a data-bs-toggle="collapse" href="#collapseExample5"><h3>Listado de Motor</h3></a>
+{% if motor.count() > 0 %}
+<div class="collapse" id="collapseExample5">
+    {% for motor in motor %}
+    <li class="list-group-item">
+        (<a href="/motor/elimina?id={{ motor.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">supr</a>)
+        (<a href="/motor/modifica?id={{ motor.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">modif</a>)
+        {% include "entrada_motor.html" %}
+    </li>
+    {% endfor %}
+</div>
+{% else %}
+<div class="collapse" id="collapseExample5">
+    <p><b>No hay Motor registrado.</b></p>
+</div>
+{% endif %}
+
+<a data-bs-toggle="collapse" href="#collapseExample6"><h3>Listado de Aviones</h3></a>
+{% if avion.count() > 0 %}
+<div class="collapse" id="collapseExample6">
+    {% for avion in avion %}
+    <li class="list-group-item">
+        (<a href="/avion/elimina?id={{ avion.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">supr</a>)
+        (<a href="/avion/modifica?id={{ avion.key.urlsafe() }}&ship={{ barco.key.urlsafe() }}">modif</a>)
+        {% include "entrada_avion.html" %}
+    </li>
+    {% endfor %}
+</div>
+{% else %}
+<div class="collapse" id="collapseExample6">
+    <p><b>No hay Aviones registrados.</b></p>
+</div>
+{% endif %}
+<p>
+<p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+</svg><a href="/equipamiento/nueva?ship={{ barco.key.urlsafe() }}">Nuevo Equipamiento</a>
+</p>
+</div>
+<a data-bs-toggle="collapse" href="#collapseExample7"><h2><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-square-fill" viewBox="0 0 16 16">
+  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.5 10a.5.5 0 0 0 .832.374l4.5-4a.5.5 0 0 0 0-.748l-4.5-4A.5.5 0 0 0 5.5 4v8z"/>
+</svg>Comentarios</h2></a>
+<div style="margin-left: 30px">
+{% if comentario.count() > 0 %}
+<div class="collapse" id="collapseExample7">
+    {% for comentario in comentario %}
+    <li class="list-group-item">
+        {% include "entrada_comentario.html" %}
+    </li>
+    {% endfor %}
+</div>
+{% else %}
+<div class="collapse" id="collapseExample7">
+    <p><b>No hay comentarios.</b></p>
+</div>
+{% endif %}
+</p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+</svg><a href="/comentario/nueva?ship={{ barco.key.urlsafe() }}">Añadir Comentario</a>
+</div>
+<div style="margin-bottom: 40px">
+<p>
+    <a href="/"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+</svg>Volver</a>
+</p>
+</div>
+</div>
+{% endblock %}

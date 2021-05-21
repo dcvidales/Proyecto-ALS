@@ -1,0 +1,65 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+
+<form id="frmNuevoEquipamiento"
+      method="post"
+      action="/avion/modifica?id={{ avion.key.urlsafe() }}&ship={{ clave_barco }}"
+      enctype="multipart/form-data"
+      onsubmit="return check()">
+<div class="form-group col-6" style="margin-left:40px; margin-top: 40px; border-style: groove; background-color: aliceblue">
+    <p>
+        <label for="edTipo">Tipo:</label>
+        <input type="text" class="form-control" id="edTipo" name="edTipo"
+                   value="{{ avion.tipo }}" readonly />
+    </p>
+
+    <p>
+        <label for="edNombre">Nombre:</label>
+        <input type="text" class="form-control" id="edNombre" name="edNombre"
+               value="{{ avion.nombre }}" />
+    </p>
+    <div id="count">
+        <p>
+            <label for="edCantidad">Cantidad:</label>
+            <input type="number" class="form-control" id="edCantidad" name="edCantidad"
+                   value="{{ avion.cantidad }}" />
+        </p>
+    </div>
+    <div id="avion">
+        <p>
+            <label for="edClase">Clase:</label>
+            <select name="edClase" class="form-select" id="edClase" form="frmNuevoEquipamiento">
+                <option value="{{ avion.clase }}">{{ avion.clase }}</option>
+                <option disabled>-------------------</option>
+                <option value="Caza">Caza</option>
+                <option value="Bombardero">Bombardero</option>
+                <option value="Torpedero">Torpedero</option>
+                <option value="Observación">Observacion</option>
+            </select>
+        </p>
+        <p>
+            <label for="edVelocidadAvion">Velocidad Máxima: (knts)</label>
+            <input type="text" class="form-control" id="edVelocidadAvion" name="edVelocidadAvion"
+                   value="{{ avion.velocidad_maxima}}" />
+        </p>
+    </div>
+    <p><input type="submit" value="Modificar"></p>
+</div>
+</form>
+
+
+<script>
+    function check()
+    {
+        const edNombre = document.getElementById( "edNombre" );
+        const edTipo = document.getElementById( "edTipo" );
+
+        return ( edNombre.value.trim().length > 0
+              && edTipo.value.trim().length > 0)
+    }
+</script>
+
+
+
+{% endblock %}

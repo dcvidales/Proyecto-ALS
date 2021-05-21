@@ -1,0 +1,51 @@
+{% extends "esqueleto.html" %}
+
+{% block contenido %}
+
+<form id="frmNuevoEquipamiento"
+      method="post"
+      action="/motor/modifica?id={{ motor.key.urlsafe() }}&ship={{ clave_barco }}"
+      enctype="multipart/form-data"
+      onsubmit="return check()">
+<div class="form-group col-6" style="margin-left:40px; margin-top: 40px; border-style: groove; background-color: aliceblue">
+    <p>
+        <label for="edTipo">Tipo:</label>
+        <input type="text" class="form-control" id="edTipo" name="edTipo"
+                   value="{{ motor.tipo }}" readonly />
+    </p>
+    <p>
+        <label for="edNombre">Nombre:</label>
+        <input type="text" class="form-control" id="edNombre" name="edNombre"
+               value="{{ motor.nombre }}" />
+    </p>
+    <div id="motor">
+        <p>
+            <label for="edPotencia">Potencia: (CV)</label>
+            <input type="text" class="form-control" id="edPotencia" name="edPotencia"
+                   value="{{ motor.potencia }}" />
+        </p>
+        <p>
+            <label for="edVelocidadMax">Velocidad Máxima: (knts)</label>
+            <input type="text" class="form-control" id="edVelocidadMax" name="edVelocidadMax"
+                   value="{{ motor.velocidad_maxima }}" />
+        </p>
+    </div>
+    <p><input type="submit" value="Modificar"></p>
+</div>
+</form>
+
+
+<script>
+    function check()
+    {
+        const edNombre = document.getElementById( "edNombre" );
+        const edTipo = document.getElementById( "edTipo" );
+
+        return ( edNombre.value.trim().length > 0
+              && edTipo.value.trim().length > 0)
+    }
+</script>
+
+
+
+{% endblock %}
